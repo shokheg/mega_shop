@@ -49,6 +49,7 @@ public class Shop implements Serializable {
     @Column
     private String description;
 
+    //
     private int count;      //что за поле? Нет описания
 
     private double rating;

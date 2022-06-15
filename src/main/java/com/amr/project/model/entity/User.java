@@ -1,5 +1,6 @@
 package com.amr.project.model.entity;
 
+import com.amr.project.model.enums.Gender;
 import com.amr.project.model.enums.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,13 +26,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 @Entity
 @Getter
@@ -60,6 +56,19 @@ public class User implements UserDetails {
     private boolean isUsing2FA;
     private String secret;
     private boolean isIdentification;
+    @ToString.Exclude
+    private String phone;
+    @ToString.Exclude
+    private String firstName;
+    @ToString.Exclude
+    private String lastName;
+    @ToString.Exclude
+    private int age;
+    @Enumerated(EnumType.STRING)
+    @ToString.Exclude
+    private Gender gender;
+    @ToString.Exclude
+    private LocalDate birthday;
 
 
     public User() {
@@ -77,17 +86,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "personal_data_id", referencedColumnName = "id")
     @ToString.Exclude
     private PersonalData personalData;
-
-
-
-    @OneToOne(mappedBy = "user",
-            cascade = {CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.REFRESH,
-            CascadeType.DETACH},
-            fetch = FetchType.LAZY, optional = false)
-    @ToString.Exclude
-    private UserInfo userInfo;
 
 
     @OneToOne(mappedBy = "user",

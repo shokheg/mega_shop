@@ -56,16 +56,19 @@ public class City {
         this.id = id;
     }
 
+    //TODO: переписал equals & hashcode, города равны если их названия и название страны равны
+    // Но правильно ли это?
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return id != null && Objects.equals(id, city.id);
+        return name.equals(city.name) && Objects.equals(country, city.country);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(name, country);
     }
 }

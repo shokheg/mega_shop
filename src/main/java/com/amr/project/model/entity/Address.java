@@ -8,16 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,13 +26,13 @@ public class Address {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "city_index", nullable = false, unique = true)
+    @Column(name = "city_index", nullable = false)
     private String cityIndex;
 
-    @Column(name = "street", nullable = false, unique = true)
+    @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "house", nullable = false, unique = true)
+    @Column(name = "house", nullable = false)
     private String house;
 
 
