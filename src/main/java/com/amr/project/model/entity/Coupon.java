@@ -43,6 +43,10 @@ public class Coupon {
     @ToString.Exclude
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Shop shop;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
