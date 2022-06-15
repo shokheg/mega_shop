@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class PersonalData {
     private Long passport;
 
     @Column(name = "dateOfIssue", nullable = false)
-    private Date dateOfIssue;
+    private LocalDate dateOfIssue;
 
     @Column(name = "authority", nullable = false)
     private String authority;
