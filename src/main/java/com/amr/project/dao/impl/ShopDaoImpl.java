@@ -13,4 +13,11 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
     public List<Shop> findAllShopForUser() {
         return em.createQuery("select s from Shop s where s.isPretendedToBeDeleted = false and s.isModerateAccept = true", Shop.class).getResultList();
     }
+
+    @Override
+    public List<Shop> findShopsBySearchRequest(String query) {
+        return em.createQuery("select s from Shop s where s.name like :query and s.isModerateAccept = true and s.isPretendedToBeDeleted = false", Shop.class)
+                .setParameter("query", "%" + query + "%")
+                .getResultList();
+    }
 }
