@@ -40,7 +40,7 @@ public class SearchRestController {
         this.itemConverter = itemConverter;
     }
 
-    @GetMapping
+    @GetMapping("/shops")
     @ApiOperation(value = "Получить магазины, где в названии есть query")
     @ApiResponses(
             value = {
@@ -52,7 +52,7 @@ public class SearchRestController {
         return new ResponseEntity<>(shopConverter.entityToDto(shops), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/items")
     @ApiOperation(value = "Получить товары, где в названии есть query")
     @ApiResponses(
             value = {
