@@ -20,4 +20,9 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
                 .setParameter("query", "%" + query + "%")
                 .getResultList();
     }
+
+    @Override
+    public List<Shop> findPopularShop() {
+        return em.createQuery("select s from Shop s where s.isPretendedToBeDeleted = false and s.isModerateAccept = true order by s.rating desc", Shop.class).setMaxResults(4).getResultList();
+    }
 }

@@ -35,4 +35,10 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     public List<Shop> findShopsBySearchRequest(String query) {
         return shopDao.findShopsBySearchRequest(query);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Shop> findPopularShop() {
+        return shopDao.findPopularShop();
+    }
 }

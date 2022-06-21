@@ -29,4 +29,8 @@ public class ItemServiceImpl extends ReadWriteServiceImpl<Item, Long> implements
     public List<Item> findItemsBySearchRequest(String query) {
         return itemDao.findItemsBySearchRequest(query);
     }
+    @Override
+    public List<Item> findPopularItems() {
+        return itemDao.findPopularItems();
+    }
 }
