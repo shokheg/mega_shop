@@ -7,6 +7,7 @@ import java.util.List;
 public interface ShopService extends ReadWriteService<Shop, Long> {
 
     List<Shop> findAllShopForUser();
+    List<Shop>findPopularShop();
 
     List<Shop> findShopsBySearchRequest(String query);
 }
