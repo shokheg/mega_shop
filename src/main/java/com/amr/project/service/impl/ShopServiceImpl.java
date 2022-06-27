@@ -2,6 +2,7 @@ package com.amr.project.service.impl;
 
 import com.amr.project.dao.abstracts.ReadWriteDao;
 import com.amr.project.dao.abstracts.ShopDao;
+import com.amr.project.model.dto.PaginationDto;
 import com.amr.project.model.entity.Shop;
 import com.amr.project.service.abstracts.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,10 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     @Transactional(readOnly = true)
     public List<Shop> findPopularShop() {
         return shopDao.findPopularShop();
+    }
+
+    @Override
+    public PaginationDto findAllShop(int page, int size, int offset) {
+        return shopDao.findAllShop(page, size, offset);
     }
 }
