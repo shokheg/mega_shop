@@ -1,6 +1,8 @@
 package com.amr.project.dao.impl;
 
+import com.amr.project.annotations.Pagination;
 import com.amr.project.dao.abstracts.ItemDao;
+import com.amr.project.model.dto.PaginationDto;
 import com.amr.project.model.entity.Item;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,10 @@ public class ItemDaoImpl extends ReadWriteDaoImpl <Item, Long> implements ItemDa
         return em.createQuery("select i from Item i where i.name like :query and i.isModerateAccept = true and i.isPretendedToBeDeleted = false", Item.class)
                 .setParameter("query", "%" + query + "%")
                 .getResultList();
+    }
+
+    @Pagination(entityClass = Item.class)
+    public PaginationDto findAllItems(int page, int size, int offset) {
+        return null;
     }
 }
