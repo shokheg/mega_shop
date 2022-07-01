@@ -62,7 +62,9 @@ public abstract class ShopConverter {
 
     protected CityDto getCityDto(Shop shop) {
         if (shop.getAddress() != null) {
-            return cityConverter.entityToDto(shop.getAddress().getCity());
+            if (shop.getAddress().getCity() != null) {
+                return cityConverter.entityToDto(shop.getAddress().getCity());
+            }
         }
         return null;
     }
