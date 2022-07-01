@@ -1,6 +1,6 @@
 package com.amr.project.webapp.controller;
 
-import com.amr.project.converter.ItemConverter;
+import com.amr.project.converter.ItemMapper;
 import com.amr.project.converter.ShopConverter;
 import com.amr.project.model.dto.ItemDto;
 import com.amr.project.model.dto.ShopDto;
@@ -30,14 +30,14 @@ public class SearchRestController {
     private ShopService shopService;
     private ItemService itemService;
     private ShopConverter shopConverter;
-    private ItemConverter itemConverter;
+    private ItemMapper itemMapper;
 
     @Autowired
-    public SearchRestController(ShopService shopService, ItemService itemService, ShopConverter shopConverter, ItemConverter itemConverter) {
+    public SearchRestController(ShopService shopService, ItemService itemService, ShopConverter shopConverter, ItemMapper itemMapper) {
         this.shopService = shopService;
         this.itemService = itemService;
         this.shopConverter = shopConverter;
-        this.itemConverter = itemConverter;
+        this.itemMapper = itemMapper;
     }
 
     @GetMapping("/shops")
@@ -61,6 +61,6 @@ public class SearchRestController {
     )
     public ResponseEntity<List<ItemDto>> searchItem(@RequestParam String query) {
         List<Item> items = itemService.findItemsBySearchRequest(query);
-        return new ResponseEntity<>(itemConverter.entityToDto(items), HttpStatus.OK);
+        return new ResponseEntity<>(itemMapper.toItemsDTO(items), HttpStatus.OK);
     }
 }
