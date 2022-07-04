@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 logs
+.DS_Store
 
 ### STS ###
 .apt_generated
@@ -19,6 +20,10 @@ logs
 *.iws
 *.iml
 *.ipr
+.mvn
+mvnw.cmd
+.dockerignore
+mvnw
 
 ### NetBeans ###
 /nbproject/private/

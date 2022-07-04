@@ -247,6 +247,7 @@ public class RandomValues {
     public static Image randomImageFromFolder(String folderName) {
         byte[] picture;
         File folder = new File("src/main/resources/static/image/" + folderName);
+//        File folder = new File("classes/static/image/" + folderName); //данный код нужен для упаковки приложения в jar файл.
         File[] files = folder.listFiles();
 
         if (files == null) {
