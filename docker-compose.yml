@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  nginx-server:
+    restart: always
+    container_name: 'nginx-server'
+    image: 'sithai/nginx:v1'
+    depends_on:
+      - front_app
+    ports:
+      - '80:80'
+
+  front_app:
+    container_name: 'project-avito4_1_front'
+    image: 'sithai/avito4_1_front'
+#    ports:
+#      - '3000:3000'
+  mysql:
+    container_name: 'mysql-image'
+    image: 'sithai/mysql:8.0.25'
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_DATABASE=platform'
+
+  app:
+    container_name: 'project-avito4_1_back'
+    image: 'sithai/avito4_1_app:latest'
+    depends_on:
+      - mysql
+    ports:
+      - '8888:8888'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-image:3306/platform?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_PLATFORM=org.hibernate.dialect.MySQL8Dialect
