@@ -53,9 +53,9 @@ public class User implements UserDetails {
     private String password;
     private boolean activate;
     private String activationCode;
-    private boolean isUsing2FA;
+    private boolean using2FA;
     private String secret;
-    private boolean isIdentification;
+    private boolean identification;
     @ToString.Exclude
     private String phone;
     @ToString.Exclude
