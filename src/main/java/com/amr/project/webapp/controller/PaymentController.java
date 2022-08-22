@@ -89,7 +89,7 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/quick")
+    @GetMapping("/quick") //todo прикрутить реквест параметры
     public void getQuickPaymentForm(@RequestParam HttpServletResponse response) throws IOException {
         MoneyAmount amount = new MoneyAmount(
                 BigDecimal.valueOf(1.00),
@@ -104,6 +104,7 @@ public class PaymentController {
     @GetMapping("/status/{billId}")
     public ResponseEntity<BillResponse> getBillStatus(@PathVariable String billId){
         BillResponse billResponse = client.getBillInfo(billId);
+
         return new ResponseEntity<>(billResponse, HttpStatus.OK);
     }
 
