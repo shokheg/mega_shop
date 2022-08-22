@@ -24,6 +24,12 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
     }
 
     @Override
+    public List<Shop> findShopsNotModerated() {
+        return em.createQuery("select s from Shop s where s.isModerated = false", Shop.class)
+                .getResultList();
+    }
+
+    @Override
     public List<Shop> findPopularShop() {
         return em.createQuery("select s from Shop s where s.isPretendedToBeDeleted = false and s.isModerateAccept = true order by s.rating desc", Shop.class).setMaxResults(4).getResultList();
     }
@@ -33,4 +39,6 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements ShopDao
     public PaginationDto findAllShop(int page, int size, int offset) {
         return null;
     }
+
+
 }

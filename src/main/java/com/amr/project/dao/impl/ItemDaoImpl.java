@@ -23,4 +23,10 @@ public class ItemDaoImpl extends ReadWriteDaoImpl <Item, Long> implements ItemDa
     public PaginationDto findAllItems(int page, int size, int offset) {
         return null;
     }
+
+    @Override
+    public List<Item> findNotModeratedItems() {
+        return em.createQuery("select i from Item i where i.isModerated = false", Item.class)
+                .getResultList();
+    }
 }
