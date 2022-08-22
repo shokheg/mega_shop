@@ -44,6 +44,12 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Shop> findShopsNotModerated() {
+        return shopDao.findShopsNotModerated();
+    }
+
+    @Override
     public PaginationDto findAllShop(int page, int size, int offset) {
         return shopDao.findAllShop(page, size, offset);
     }

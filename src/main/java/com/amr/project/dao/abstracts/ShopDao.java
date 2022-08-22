@@ -10,5 +10,6 @@ public interface ShopDao extends ReadWriteDao<Shop, Long> {
     List<Shop> findAllShopForUser();
     List<Shop> findPopularShop();
     List<Shop> findShopsBySearchRequest(String query);
+    List<Shop> findShopsNotModerated();
     PaginationDto findAllShop(int page, int size, int offset);
 }

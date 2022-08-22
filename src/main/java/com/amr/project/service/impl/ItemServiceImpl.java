@@ -40,4 +40,9 @@ public class ItemServiceImpl extends ReadWriteServiceImpl<Item, Long> implements
     public PaginationDto findAllItems(int page, int size, int offset) {
         return itemDao.findAllItems(page, size, offset);
     }
+
+    @Override
+    public List<Item> findItemsNotModerated() {
+        return itemDao.findNotModeratedItems();
+    }
 }
