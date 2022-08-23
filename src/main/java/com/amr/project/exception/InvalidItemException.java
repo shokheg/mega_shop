@@ -1,6 +1,9 @@
 package com.amr.project.exception;
 
-public class InvalidItemException extends RuntimeException {
+import lombok.Getter;
+
+@Getter
+public class InvalidItemException extends ApiException {
 
     private final ErrorMessage errorMessage;
 
