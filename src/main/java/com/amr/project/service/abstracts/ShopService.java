@@ -9,6 +9,7 @@ public interface ShopService extends ReadWriteService<Shop, Long> {
 
     List<Shop> findAllShopForUser();
     List<Shop>findPopularShop();
+    List<Shop> findShopsNotModerated();
 
     List<Shop> findShopsBySearchRequest(String query);
 

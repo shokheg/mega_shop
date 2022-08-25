@@ -11,4 +11,6 @@ public interface ItemDao extends ReadWriteDao<Item, Long>{
     List<Item> findItemsBySearchRequest(String query);
 
     PaginationDto findAllItems(int page, int size, int offset);
+
+    List<Item> findNotModeratedItems();
 }
