@@ -1,5 +1,5 @@
 package com.amr.project.service.abstracts;
 
 public interface EmailSenderService {
-    void senEmail(String to, String subject, String message);
+    void sendEmail(String to, String subject, String message);
 }
