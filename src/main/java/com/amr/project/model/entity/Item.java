@@ -56,7 +56,6 @@ public class Item {
     @Column(name = "rating")
     private double rating;
 
-
     private String description;
     private int discount;
 
@@ -69,9 +68,9 @@ public class Item {
     private Category category;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @ToString.Exclude
-    private CartItem cartItem;
+    private List<CartItem> cartItem;
 
 
     @OneToMany(
@@ -102,7 +101,7 @@ public class Item {
     private List<Favorite> favorites;
 
 
-
+    //лишнее поле скорее всего
     @ManyToMany(mappedBy = "itemsInOrder")
     @OrderBy("orderDate ASC")
     @ToString.Exclude

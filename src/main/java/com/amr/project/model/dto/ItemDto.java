@@ -24,6 +24,11 @@ public class ItemDto {
     private int count;
     private double rating;
     private String description;
+    private String discount;
     private List<ImageDto> images;
     private List<ReviewDto> reviews;
+//    private boolean isModerated;
+//    private boolean isModerateAccept;
+//    private String moderatedRejectReason;
+//    private boolean isPretendedToBeDeleted;
 }

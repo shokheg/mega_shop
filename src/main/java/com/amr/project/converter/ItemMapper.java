@@ -73,7 +73,7 @@ public abstract class ItemMapper {
         return null;
     }
 
-    protected CartItem getCartItem(ItemDto itemDto) {
+    protected List<CartItem> getCartItem(ItemDto itemDto) {
         if (itemDto.getId() != null) {
             return itemService.findById(itemDto.getId()).getCartItem();
         }

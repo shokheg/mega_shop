@@ -8,24 +8,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="cart_item")
+@Table(name = "cart_item")
 @Getter
 @Setter
 @ToString
@@ -42,7 +31,7 @@ public class CartItem implements Serializable {
     private Long id;
 
     @Column(name = "quantity")
-    private int quantity; //"Лишнее" поле (информация о кол-ве товара хранится в поле "count" сущности "Item"
+    private int quantity;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,17 +44,10 @@ public class CartItem implements Serializable {
     @ToString.Exclude
     private Shop shop;
 
-
-    @OneToMany(
-            mappedBy = "cartItem",
-            cascade = {CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH,
-                    CascadeType.DETACH},
-            orphanRemoval = true
-    )
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_item")
     @ToString.Exclude
-    private List<Item> itemsInCart;
+    private Item itemInCart;
 
     @Override
     public boolean equals(Object o) {
