@@ -13,6 +13,7 @@ import com.amr.project.webapp.config.security.oauth.OAuth2UserDto;
 import com.amr.project.webapp.config.security.oauth.principal.OAuth2UserInfo;
 import com.amr.project.webapp.config.security.oauth.principal.OAuth2UserInfoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
@@ -66,7 +67,7 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
 
     @Override
     public User findUserByEmail(final String email) {
-        return oAuthUserJpaRepository.findByEmail(email);
+        return oAuthUserJpaRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found whith Email: " + email));
     }
 
     @Override
@@ -103,7 +104,7 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
     private UserRegistrationDto toUserRegistrationObject(String registrationId, OAuth2UserInfo oAuth2UserInfo) {
         return UserRegistrationDto.getBuilder()
                 .addProviderUserID(oAuth2UserInfo.getId())
-                .addDisplayName(oAuth2UserInfo.getName())
+                .addUsername(oAuth2UserInfo.getName())
                 .addEmail(oAuth2UserInfo.getEmail())
                 .addFirstName(oAuth2UserInfo.getFirstName())
                 .addLastName(oAuth2UserInfo.getLastName())

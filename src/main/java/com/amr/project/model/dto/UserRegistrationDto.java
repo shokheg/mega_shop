@@ -1,13 +1,21 @@
 package com.amr.project.model.dto;
 
+import com.amr.project.model.entity.User;
 import com.amr.project.model.enums.Social;
+import com.nimbusds.jose.shaded.json.annotate.JsonIgnore;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Data
-public class UserRegistrationDto {
+public class UserRegistrationDto implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
 
     private Long userID;
 
@@ -18,15 +26,17 @@ public class UserRegistrationDto {
     private String lastName;
 
     @NotEmpty
-    private String displayName;
+    private String username;
 
     @NotEmpty
     private String email;
 
     private Social social;
 
-    @Size(min = 8, message = "{Size.userDto.password}")
+    @JsonIgnore
     private String password;
+
+    private Collection<? extends GrantedAuthority> authorities;
 
     @NotEmpty
     private String matchingPassword;
@@ -34,11 +44,26 @@ public class UserRegistrationDto {
     public UserRegistrationDto() {
     }
 
-    public UserRegistrationDto(String providerUserId, String displayName, String firstName, String lastName, String email, String password, Social social) {
+    public UserRegistrationDto(Long userID, String username, String email, String password,
+                           Collection<? extends GrantedAuthority> authorities) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    public UserRegistrationDto(String providerUserId,
+                               String username,
+                               String firstName,
+                               String lastName,
+                               String email,
+                               String password,
+                               Social social) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.providerUserId = providerUserId;
-        this.displayName = displayName;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.social = social;
@@ -54,6 +79,11 @@ public class UserRegistrationDto {
 
     public void setEmail(final String email) {
         this.email = email;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     public String getPassword() {
@@ -80,12 +110,32 @@ public class UserRegistrationDto {
         this.userID = userID;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -120,9 +170,20 @@ public class UserRegistrationDto {
         this.matchingPassword = matchingPassword;
     }
 
+    public static UserRegistrationDto build(User user) {
+        List<GrantedAuthority> authorities = new ArrayList<>(user.getAuthorities());
+
+        return new UserRegistrationDto(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities);
+    }
+
     public static class Builder {
         private String providerUserID;
-        private String displayName;
+        private String username;
         private String firstName;
         private String lastName;
         private String email;
@@ -134,8 +195,8 @@ public class UserRegistrationDto {
             return this;
         }
 
-        public Builder addDisplayName(final String displayName) {
-            this.displayName = displayName;
+        public Builder addUsername(final String username) {
+            this.username = username;
             return this;
         }
 
@@ -165,7 +226,7 @@ public class UserRegistrationDto {
         }
 
         public UserRegistrationDto build() {
-            return new UserRegistrationDto(providerUserID, displayName, firstName, lastName, email, password, social);
+            return new UserRegistrationDto(providerUserID, username, firstName, lastName, email, password, social);
         }
     }
 }
