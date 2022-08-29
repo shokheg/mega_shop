@@ -1,5 +1,8 @@
 package com.amr.project.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +40,7 @@ public class City {
     private String name;
 
 
-    @OneToMany(
+    @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "city",
             cascade = {CascadeType.PERSIST,
                     CascadeType.MERGE,

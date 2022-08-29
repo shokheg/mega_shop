@@ -1,6 +1,7 @@
 package com.amr.project.model.entity;
 
 import com.amr.project.model.entity.report.SalesHistory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
