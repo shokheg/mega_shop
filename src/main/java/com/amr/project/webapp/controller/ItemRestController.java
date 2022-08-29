@@ -6,6 +6,7 @@ import com.amr.project.exception.InvalidItemException;
 import com.amr.project.model.dto.ItemDto;
 import com.amr.project.model.entity.Item;
 import com.amr.project.service.abstracts.ItemService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -17,6 +18,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/api/items")
+@Api(tags = "Контроллер работы с товарами")
 public class ItemRestController {
 
     public final ItemService itemServiceImpl;

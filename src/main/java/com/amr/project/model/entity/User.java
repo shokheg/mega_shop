@@ -36,6 +36,9 @@ import java.util.*;
 @AllArgsConstructor
 @ToString
 public class User implements UserDetails {
+
+    private static final long serialVersionUID = -4384513137901030131L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -69,6 +72,10 @@ public class User implements UserDetails {
     private Gender gender;
     @ToString.Exclude
     private LocalDate birthday;
+
+    private String providerUserId;
+
+    private String provider;
 
 
     public User() {
@@ -213,6 +220,12 @@ public class User implements UserDetails {
     )
     @ToString.Exclude
     private Set<Feedback> feedbacks;
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
