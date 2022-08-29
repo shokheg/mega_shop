@@ -221,6 +221,12 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Set<Feedback> feedbacks;
 
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new HashSet<>(Arrays.asList(role));

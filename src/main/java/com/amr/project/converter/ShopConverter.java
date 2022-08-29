@@ -38,10 +38,10 @@ public abstract class ShopConverter {
             @Mapping(target = "cartItem", expression = "java(getCartItem(shopDto))"),
             @Mapping(target = "feedbacks", expression = "java(getFeedbacks(shopDto))"),
             @Mapping(target = "favorites", expression = "java(getFavorites(shopDto))"),
-            @Mapping(target = "moderated", expression = "java(getIsModerated(shopDto))"),
-            @Mapping(target = "moderateAccept", expression = "java(getIsModerateAccept(shopDto))"),
+//            @Mapping(target = "moderated", expression = "java(getIsModerated(shopDto))"),
+//            @Mapping(target = "moderateAccept", expression = "java(getIsModerateAccept(shopDto))"),
             @Mapping(target = "moderatedRejectReason", expression = "java(getModeratedRejectReason(shopDto))"),
-            @Mapping(target = "pretendedToBeDeleted", expression = "java(getIsPretendedToBeDeleted(shopDto))"),
+//            @Mapping(target = "pretendedToBeDeleted", expression = "java(getIsPretendedToBeDeleted(shopDto))"),
             @Mapping(target = "coupons", expression = "java(getCoupons(shopDto))"),
             @Mapping(target = "discounts", expression = "java(getDiscounts(shopDto))"),
             @Mapping(target = "reviews", expression = "java(getReviews(shopDto))")
