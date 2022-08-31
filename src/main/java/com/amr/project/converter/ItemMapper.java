@@ -6,9 +6,10 @@ import com.amr.project.model.entity.report.SalesHistory;
 import com.amr.project.service.abstracts.ItemService;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 @Mapper(componentModel = "spring", uses = {ImageMapper.class, ReviewMapper.class})
 public abstract class ItemMapper {
     @Autowired

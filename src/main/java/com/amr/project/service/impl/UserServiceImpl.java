@@ -71,6 +71,11 @@ public class UserServiceImpl extends ReadWriteServiceImpl<User, Long> implements
     }
 
     @Override
+    public User findUserByUsername(final String username) {
+        return oAuthUserJpaRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found whith username: " + username));
+    }
+
+    @Override
     @Transactional
     public OAuth2UserDto processUserRegistration(String registrationId,
                                                  Map<String, Object> attributes,

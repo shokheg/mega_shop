@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author shokhalevich
  */
-
+@Component
 @Mapper(componentModel = "spring")
 public abstract class CartItemConverter {
 

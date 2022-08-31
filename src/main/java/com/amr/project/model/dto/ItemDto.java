@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,13 +19,17 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id", scope = Long.class)
 public class ItemDto {
+    @NotNull
+    @Min(value = 0L, message = "The value must be positive")
     private Long id;
     private String name;
     private BigDecimal basePrice;
     private BigDecimal price;
+    @Min(value = 0L, message = "The value must be positive")
     private int count;
     private double rating;
     private String description;
+    @Min(value = 0L, message = "The value must be positive")
     private String discount;
     private List<ImageDto> images;
     private List<ReviewDto> reviews;

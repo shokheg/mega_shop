@@ -19,4 +19,18 @@ public class CartDaoImpl extends ReadWriteDaoImpl<CartItem, Long> implements Car
                 .setParameter("id", id);
         return query.getResultList();
     }
+
+    @Override
+    public List<CartItem> findCartItemsByItemID(Long id) {
+        TypedQuery<CartItem> query = em.createQuery("select c from CartItem c where c.itemInCart.id = :id", CartItem.class)
+                .setParameter("id", id);
+        return query.getResultList();
+    }
+
+    @Override
+    public void deleteCartItemsByItemID(Long id) {
+        em.createQuery("delete from CartItem u where u.itemInCart.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }

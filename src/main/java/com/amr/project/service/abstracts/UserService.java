@@ -18,5 +18,7 @@ public interface UserService extends ReadWriteService<User, Long> {
     User findUserByEmail(String email);
 
     OAuth2UserDto processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
+
+    User findUserByUsername(String username);
 }
 

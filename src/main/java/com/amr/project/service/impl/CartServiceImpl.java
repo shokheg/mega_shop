@@ -25,4 +25,25 @@ public class CartServiceImpl extends ReadWriteServiceImpl<CartItem, Long> implem
         return cartDao.findCartItemsByUserID(id);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<CartItem> findCartItemsByItemID(Long id) {
+        return cartDao.findCartItemsByItemID(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCartItemsByItemID(Long id) {
+        cartDao.deleteCartItemsByItemID(id);
+    }
+
+    @Override
+    @Transactional
+    public int getCartItemQuantityByID(Long id) {
+        return findCartItemsByItemID(id)
+                .stream()
+                .mapToInt(CartItem::getQuantity)
+                .sum();
+    }
+
 }
