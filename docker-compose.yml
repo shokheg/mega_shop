@@ -1,10 +1,10 @@
-version: '3'
+version: '3.7'
 
 services:
   nginx-server:
     restart: always
     container_name: 'nginx-server'
-    image: 'sithai/nginx:v1'
+    image: 'hermanvfx/nginx:latest'
     depends_on:
       - front_app
     ports:
@@ -12,23 +12,30 @@ services:
 
   front_app:
     container_name: 'project-avito4_1_front'
-    image: 'sithai/avito4_1_front'
-#    ports:
-#      - '3000:3000'
+    image: 'hermanvfx/avito4_1_front:latest'
+  #    ports:
+  #      - '3000:3000'
   mysql:
     container_name: 'mysql-image'
-    image: 'sithai/mysql:8.0.25'
+    image: 'hermanvfx/mysql:latest'
     environment:
       - 'MYSQL_ROOT_PASSWORD=root'
       - 'MYSQL_DATABASE=platform'
+    healthcheck:
+      test: "mysql -uroot -proot platform -e 'select 1'"
+      interval: 1s
+      retries: 120
+    cap_add:
+      - SYS_NICE
 
   app:
     container_name: 'project-avito4_1_back'
-    image: 'sithai/avito4_1_app:latest'
-    depends_on:
-      - mysql
+    image: 'hermanvfx/avito4_1_app:latest'
     ports:
       - '8888:8888'
+    depends_on:
+      mysql:
+        condition: service_healthy
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-image:3306/platform?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
