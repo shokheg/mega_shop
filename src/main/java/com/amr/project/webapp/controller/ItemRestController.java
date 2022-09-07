@@ -4,7 +4,9 @@ import com.amr.project.converter.ItemMapper;
 import com.amr.project.exception.ErrorMessage;
 import com.amr.project.exception.InvalidItemException;
 import com.amr.project.model.dto.ItemDto;
+import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.Item;
+import com.amr.project.model.entity.Shop;
 import com.amr.project.service.abstracts.ItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/items")
@@ -47,6 +50,19 @@ public class ItemRestController {
         return new ResponseEntity<>(itemDto, HttpStatus.OK);
     }
 
+    @GetMapping()
+    @ApiOperation(value = "Получить все товары")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "OK"),
+                    @ApiResponse(code = 204, message = "Товар не найден.")
+            }
+    )
+    public ResponseEntity<List<ItemDto>> getAllItem() {
+        List<Item> items = itemServiceImpl.findAll();
+        List<ItemDto> itemDtoList = itemMapper.toItemsDTO(items);
+        return new ResponseEntity<>(itemDtoList, HttpStatus.OK);
+    }
 
     @ApiOperation(value = "Добавить новый товар (без ID)")
     @ApiResponses(
