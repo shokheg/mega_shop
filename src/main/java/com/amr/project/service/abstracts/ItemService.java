@@ -13,5 +13,7 @@ public interface ItemService extends ReadWriteService<Item, Long>{
 
     PaginationDto findAllItems(int page, int size, int offset);
 
+    List<Item> findAll();
+
     List<Item> findItemsNotModerated();
 }

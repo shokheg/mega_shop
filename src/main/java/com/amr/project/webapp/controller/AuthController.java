@@ -37,15 +37,13 @@ public class AuthController {
     private JwtUtils jwtUtils;
     private PasswordEncoder passwordEncoder;
 
-    public AuthController(AuthenticationManager authenticationManager,
-                          OAuthUserJpaRepository userRespository,
-                          JwtUtils jwtUtils,
-                          PasswordEncoder passwordEncoder) {
+    public AuthController(AuthenticationManager authenticationManager, OAuthUserJpaRepository userRespository, JwtUtils jwtUtils, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.userRespository = userRespository;
         this.jwtUtils = jwtUtils;
         this.passwordEncoder = passwordEncoder;
     }
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {

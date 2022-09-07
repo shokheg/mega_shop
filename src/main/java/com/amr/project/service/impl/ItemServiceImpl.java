@@ -42,6 +42,11 @@ public class ItemServiceImpl extends ReadWriteServiceImpl<Item, Long> implements
     }
 
     @Override
+    public List<Item> findAll() {
+        return itemDao.findAll();
+    }
+
+    @Override
     public List<Item> findItemsNotModerated() {
         return itemDao.findNotModeratedItems();
     }
